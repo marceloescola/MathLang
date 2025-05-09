@@ -1,22 +1,46 @@
 import java.util.Arrays;
+import java.util.*;
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+
 
 public class App {
     public static void main(String[] args) {
-        //import our class function as transf
         Arrayp transf = new Arrayp();
+        /* import our class function as transf
         String numbers = "1 2 3 6 8 2 9";
+        */
+        //take numbers from txt
+        //just declare data so we can use it outside try
+        String data = "";
+        try {
+            //takes file
+            File numbers = new File(".txt");
+            //scanner for file
+            Scanner reader = new Scanner(numbers);
+
+            while (reader.hasNextLine()) {
+                data = reader.nextLine();
+                System.out.println(data);
+            }
+            reader.close();
+        } catch(FileNotFoundException e) {
+            System.out.println("Error");
+            e.printStackTrace();
+        }
 
         //split
-        String[] numlist = numbers.split(" ");
+        String[] numlist = data.split(" ");
         int summed = 0;
         for (String i : numlist) {
-            System.out.println(i);
+            //makes i a int a sum it with summed
             summed += Integer.parseInt(i);
         }
         //we use transf.transform(numlist) to print the list using the class we did.
         System.out.println("Content: " + transf.transform(numlist));
         System.out.println("Result: " + summed); 
     }
+
 }
 
 //This class is like a function to print lists
